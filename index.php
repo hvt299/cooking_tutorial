@@ -2,18 +2,18 @@
     session_start();
     require("model/connect_db.php");
     require("model/menu_db.php");
-    require("model/course_db.php");
-    require("model/rating_db.php");
+    // require("model/course_db.php");
+    // require("model/rating_db.php");
     $menu_list = get_menu();
-    $course_list = get_course();
-    $rating_list = get_rating();
+    // $course_list = get_course();
+    // $rating_list = get_rating();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COURSE ONLINE - Bring Course To You!</title>
+    <title>Cooking Tutorial</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/swiper@11.0.4/swiper-bundle.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 <body>
     <header>
         <div class="navbar">
-            <div class="logo"><a href="index.php">COURSE ONLINE</a></div>
+            <div class="logo"><a href="index.php" class="web_name">COOKING TUTORIAL</a></div>
             <ul class="links">
                 <?php foreach ($menu_list as $menu): ?>
                 <li><a href="<?php echo $menu['URLMenu']; ?>"><?php echo $menu['TenMenu']; ?></a></li>
@@ -59,20 +59,20 @@
 
     <main>
         <section id="home">
-            <h1>&lt;/&gt;Bring Course To You!&lt;/&gt;</h1>
+            <h1>HỌC NẤU ĂN GIA ĐÌNH</h1>
             <p>
-                We offer a wide range of comprehensive programming courses to equip you <br>
-                with the knowledge and skills necessary to succeed in today's digital world.
+                Dạy nấu ăn gia đình chuyên nghiệp với các khóa học bếp gia đình độc đáo<br> 
+                như bữa sáng thông minh, món ngon đãi tiệc, vào bếp cuối tuần...
             </p>
             <form class="form-inline" action="#">
                 <input class="form-control mr-sm-2 mb-3" type="text" placeholder="Tìm khóa học bạn đang quan tâm" size="50px">
-                <button class="btn btn-primary" type="submit" style="width: 100%">
+                <button class="btn btn-warning" type="submit" style="width: 100%">
                     <i class="fa-solid fa-magnifying-glass fa-beat-fade"></i>
                 </button>
             </form>
         </section>
 
-        <section class="mb-3">
+        <!-- <section class="mb-3">
             <div class="container py-5">
                 <h2 class="text-center"><i class="fa-solid fa-layer-group" style="font-size: 36px;"></i> CÁC KHÓA HỌC CỦA CHÚNG TÔI</h2>
                 <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
@@ -115,9 +115,9 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-        </section>
+        </section> -->
 
-        <section class="mb-3">
+        <!-- <section class="mb-3">
             <div class="py-5 f5f6fa-bg-color">
                 <h2 class="text-center"><i class="fa-solid fa-brain" style="font-size: 36px;"></i> NHỮNG VẤN ĐỀ GẶP PHẢI KHI TỰ HỌC LẬP TRÌNH</h2>
                 <div class="row d-flex justify-content-center text-center py-5">
@@ -143,9 +143,9 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
-        <section class="mb-3">
+        <!-- <section class="mb-3">
             <div class="py-5">
                 <h2 class="text-center"><i class="fa-solid fa-quote-left" style="font-size: 36px;"></i> CẢM NHẬN CỦA HỌC VIÊN</h2>
                 <div class="wrapper">
@@ -185,28 +185,28 @@
                                 <?php endforeach; ?>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="swiper-button-next swiper-navBtn"></div> -->
                     <!-- <div class="swiper-button-prev swiper-navBtn"></div> -->
                     <!-- <div class="swiper-pagination"></div> -->
-                </div>
+                <!-- </div>
             </div>
-        </section>
+        </section> -->
 
         <div class="container">
             <footer class="py-5">
                 <div class="row">
                     <div class="col-3">
                         <a href="index.php" class="links">
-                            <h5 class="text-primary">COURSE ONLINE</h5>
+                            <h5 class="text-warning">COOKING TUTORIAL</h5>
                         </a>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2">Bring Course To You!</li>
+                            <li class="nav-item mb-2">Dạy nấu ăn gia đình chuyên nghiệp với các khóa học bếp gia đình độc đáo như bữa sáng thông minh, món ngon đãi tiệc, vào bếp cuối tuần...</li>
                         </ul>
                     </div>
 
                     <div class="col-2">
-                        <h5 class="text-primary">Menu</h5>
+                        <h5 class="text-warning">Menu</h5>
                         <ul class="nav flex-column">
                             <?php foreach ($menu_list as $menu) : ?>
                                 <li class="nav-item mb-2"><a href="<?php echo $menu['URLMenu']; ?>" class="nav-link p-0 text-muted"><?php echo $menu['TenMenu']; ?></a></li>
@@ -215,7 +215,7 @@
                     </div>
 
                     <div class="col-2">
-                        <h5 class="text-primary">Liên kết khác</h5>
+                        <h5 class="text-warning">Liên kết khác</h5>
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="https://www.w3schools.com/" class="nav-link p-0 text-muted">W3Schools</a></li>
                             <li class="nav-item mb-2"><a href="https://openplanning.net/" class="nav-link p-0 text-muted">Openplanning</a></li>
@@ -232,7 +232,7 @@
                             <div class="d-flex w-100 gap-2">
                                 <label for="newsletter1" class="visually-hidden">Email address</label>
                                 <input id="newsletter1" type="text" class="form-control" placeholder="Type your email address here...">
-                                <button class="btn btn-primary" type="button">Theo dõi</button>
+                                <button class="btn btn-warning" type="button">Theo dõi</button>
                             </div>
                         </form>
                     </div>

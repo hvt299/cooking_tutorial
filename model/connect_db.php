@@ -1,5 +1,5 @@
 <?php
-    $dsn = 'mysql:host=localhost;dbname=courseonline';
+    $dsn = 'mysql:host=localhost;dbname=cookingtutorial';
     $username = 'root';
     $password = '';
 
