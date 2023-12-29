@@ -1,10 +1,32 @@
 <?php
-    // sửa đổi
+    function get_account() {
+        global $db;
+        $query = 'SELECT * FROM taikhoan';
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $account_list = $statement->fetchAll();
+        $statement->closeCursor();
+        return $account_list;
+    }
+
+    // Hàm lấy tài khoản dựa trên email
+    function get_account_by_email($email) {
+        global $db;
+        $query = 'SELECT * FROM taikhoan WHERE Email = :email';
+        $statement = $db->prepare($query);
+        $statement->bindValue(":email", $email);
+        $statement->execute();
+        $account = $statement->fetch(PDO::FETCH_ASSOC);
+        $statement->closeCursor();
+        return $account;
+    }
+
+    // Hàm lấy tài khoản dành cho khách hàng
     function get_account_by_email_password($email, $password) {
         global $db;
-        $query = 'SELECT taikhoan.*, hocvien.IDHV
+        $query = 'SELECT taikhoan.*, khachhang.IDKhach
                   FROM taikhoan
-                  JOIN hocvien ON taikhoan.email = hocvien.email
+                  JOIN khachhang ON taikhoan.email = khachhang.email
                   WHERE taikhoan.Email = :email AND taikhoan.Password = :password';
         $statement = $db->prepare($query);
         $statement->bindValue(":email", $email);
@@ -15,6 +37,7 @@
         return $account;
     }
 
+    // Hàm lấy tài khoản dành cho quản lý (admin)
     function get_account_by_email_password_2($email, $password) {
         global $db;
         $query = 'SELECT * FROM taikhoan
@@ -28,17 +51,53 @@
         return $account;
     }
 
-    function add_account($email, $name, $password) {
+    function add_account($email, $name, $password, $vaitro, $matkhauungdung, $ngaytao) {
         global $db;
         $query = 'INSERT INTO taikhoan
-                     (Email, Name, Password)
+                     (Email, Name, Password, VaiTro, MatKhauUngDung, NgayTao)
                   VALUES
-                     (:email, :name, :password)';
+                     (:email, :name, :password, :vaitro, :matkhauungdung, :ngaytao)';
         $statement = $db->prepare($query);
         $statement->bindValue(':email', $email);
         $statement->bindValue(':name', $name);
         $statement->bindValue(':password', $password);
+        $statement->bindValue(':vaitro', $vaitro);
+        $statement->bindValue(':matkhauungdung', $matkhauungdung);
+        $statement->bindValue(':ngaytao', $ngaytao);
         $statement->execute();
         $statement->closeCursor();
+    }
+
+    function edit_account($email, $name, $password, $vaitro, $matkhauungdung, $ngaytao) {
+        global $db;
+        $query = 'UPDATE taikhoan SET Name = :name, Password = :password, VaiTro = :vaitro, MatKhauUngDung = :matkhauungdung, NgayTao = :ngaytao WHERE Email = :email';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':email', $email);
+        $statement->bindValue(':name', $name);
+        $statement->bindValue(':password', $password);
+        $statement->bindValue(':vaitro', $vaitro);
+        $statement->bindValue(':matkhauungdung', $matkhauungdung);
+        $statement->bindValue(':ngaytao', $ngaytao);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    function delete_account($email){
+        global $db;
+        $query = 'DELETE FROM taikhoan WHERE Email = :email';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    function get_acc_type_number(){
+        global $db;
+        $query = 'SELECT VaiTro, COUNT(*) AS SoLuongLoaiTaiKhoan FROM taikhoan GROUP BY VaiTro';
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $acc_type_number = $statement->fetchAll();
+        $statement->closeCursor();
+        return $acc_type_number;
     }
 ?>

@@ -28,12 +28,12 @@
                 }
             } else {
                 foreach($account as $acc){
-                    if ($acc['VaiTro'] == "Học viên") {
-                        $_SESSION['idhv'] = $acc['IDHV']; // Đổi tên trường này
+                    if ($acc['VaiTro'] == "Khách hàng") {
+                        $_SESSION['idkhach'] = $acc['IDKhach'];
                         $_SESSION['username'] = $acc['Name'];
                         $_SESSION['vaitro'] = $acc['VaiTro'];
                         $_SESSION['matkhauungdung'] = $acc['MatKhauUngDung'];
-                        setcookie("idhv", $_SESSION['idhv'], time() + 3600); // Đổi tên trường này
+                        setcookie("idkhach", $_SESSION['idkhach'], time() + 3600);
                         setcookie("username", $_SESSION['username'], time() + 3600);
                         setcookie("vaitro", $_SESSION['vaitro'], time() + 3600);
                         setcookie("matkhauungdung", $_SESSION['matkhauungdung'], time() + 3600);
