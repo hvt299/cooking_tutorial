@@ -29,9 +29,9 @@
                 Dạy nấu ăn gia đình chuyên nghiệp với các khóa học bếp gia đình độc đáo<br> 
                 như bữa sáng thông minh, món ngon đãi tiệc, vào bếp cuối tuần...
             </p>
-            <form class="form-inline" action="#">
-                <input class="form-control mr-sm-2 mb-3" type="text" placeholder="Tìm khóa học bạn đang quan tâm" size="50px">
-                <button class="btn btn-warning" type="submit" style="width: 100%">
+            <form class="form-inline" action="search.php" method="post">
+                <input class="form-control mr-sm-2 mb-3" type="text" name="string" placeholder="Bạn đang quan tâm gì?" size="50px">
+                <button class="btn btn-warning" type="submit" name="submit" style="width: 100%">
                     <i class="fa-solid fa-magnifying-glass fa-beat-fade"></i>
                 </button>
             </form>

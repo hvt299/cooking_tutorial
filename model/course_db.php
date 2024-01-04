@@ -69,4 +69,17 @@
         $statement->closeCursor();
         return $course_number;
     }
+
+    function get_course_by_name($course_name){
+        global $db;
+        $query = 'SELECT * FROM khoahoc
+                  WHERE TenKH LIKE :tenkh';
+        $statement = $db->prepare($query);
+        $course_name = '%'.$course_name.'%';
+        $statement->bindValue(':tenkh', $course_name);
+        $statement->execute();
+        $course = $statement->fetchAll();
+        $statement->closeCursor();
+        return $course;
+    }
 ?>
