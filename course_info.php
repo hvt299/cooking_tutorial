@@ -71,7 +71,8 @@
             appearance: none;
             width: 100%;
             height: 30px;
-            background: url('path/to/star-icon.png') repeat-x; /* Thay 'path/to/star-icon.png' bằng đường dẫn đến biểu tượng sao của bạn */
+            background: url('path/to/star-icon.png') repeat-x;
+            /* Thay 'path/to/star-icon.png' bằng đường dẫn đến biểu tượng sao của bạn */
             background-size: contain;
             border: none;
             outline: none;

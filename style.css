@@ -863,8 +863,8 @@ textarea#review_content, input#star_rating {
 }
 
 button.btn-rating {
-  background-color: #0171d3;
-  color: white;
+  background-color: #ffc107;
+  color: black;
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -872,5 +872,5 @@ button.btn-rating {
 }
 
 button.btn-rating:hover {
-  background-color: #016dcb;
+  background-color: #ffca2c;
 }
