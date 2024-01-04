@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2023 at 05:37 PM
+-- Generation Time: Jan 04, 2024 at 06:48 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `cookingtutorial`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `danhgia`
+--
+
+CREATE TABLE `danhgia` (
+  `IDDG` int(11) NOT NULL,
+  `IDKhach` int(11) NOT NULL,
+  `IDKH` int(11) NOT NULL,
+  `NoiDungDG` text NOT NULL,
+  `SaoDG` tinyint(5) NOT NULL DEFAULT 1,
+  `NgayDG` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -125,6 +140,12 @@ INSERT INTO `taikhoan` (`Email`, `Name`, `Password`, `VaiTro`, `MatKhauUngDung`,
 --
 
 --
+-- Indexes for table `danhgia`
+--
+ALTER TABLE `danhgia`
+  ADD PRIMARY KEY (`IDDG`);
+
+--
 -- Indexes for table `khachhang`
 --
 ALTER TABLE `khachhang`
@@ -152,6 +173,12 @@ ALTER TABLE `taikhoan`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `danhgia`
+--
+ALTER TABLE `danhgia`
+  MODIFY `IDDG` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
