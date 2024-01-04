@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2024 at 06:48 PM
+-- Generation Time: Jan 04, 2024 at 10:34 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -34,6 +34,27 @@ CREATE TABLE `danhgia` (
   `NoiDungDG` text NOT NULL,
   `SaoDG` tinyint(5) NOT NULL DEFAULT 1,
   `NgayDG` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `danhgia`
+--
+
+INSERT INTO `danhgia` (`IDDG`, `IDKhach`, `IDKH`, `NoiDungDG`, `SaoDG`, `NgayDG`) VALUES
+(1, 2, 2, 'OK', 1, '2024-01-05 00:59:00'),
+(2, 2, 4, '!OK', 2, '2024-01-05 01:02:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hoadon`
+--
+
+CREATE TABLE `hoadon` (
+  `IDHD` int(11) NOT NULL,
+  `IDKhach` int(11) NOT NULL,
+  `TongTien` int(11) NOT NULL,
+  `TinhTrang` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -135,6 +156,19 @@ INSERT INTO `taikhoan` (`Email`, `Name`, `Password`, `VaiTro`, `MatKhauUngDung`,
 ('huavietthai299@gmail.com', 'Hứa Thái', '123321', 'Khách hàng', '', '2023-12-29 23:20:11'),
 ('phongnguyen@gmail.com', 'Phong', 'phong', 'Khách hàng', '', '2023-12-29 23:20:56');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tiendo`
+--
+
+CREATE TABLE `tiendo` (
+  `IDTD` int(11) NOT NULL,
+  `IDKhach` int(11) NOT NULL,
+  `IDKH` int(11) NOT NULL,
+  `NgayBatDau` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -143,7 +177,16 @@ INSERT INTO `taikhoan` (`Email`, `Name`, `Password`, `VaiTro`, `MatKhauUngDung`,
 -- Indexes for table `danhgia`
 --
 ALTER TABLE `danhgia`
-  ADD PRIMARY KEY (`IDDG`);
+  ADD PRIMARY KEY (`IDDG`),
+  ADD KEY `FK_danhgia_khoahoc_IDKH` (`IDKH`),
+  ADD KEY `FK_danhgia_khachhang_IDKhach` (`IDKhach`);
+
+--
+-- Indexes for table `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD PRIMARY KEY (`IDHD`),
+  ADD KEY `FK_hoadon_khachhang_IDKhach` (`IDKhach`);
 
 --
 -- Indexes for table `khachhang`
@@ -171,6 +214,14 @@ ALTER TABLE `taikhoan`
   ADD PRIMARY KEY (`Email`);
 
 --
+-- Indexes for table `tiendo`
+--
+ALTER TABLE `tiendo`
+  ADD PRIMARY KEY (`IDTD`),
+  ADD KEY `FK_tiendo_khoahoc_IDKH` (`IDKH`),
+  ADD KEY `FK_tiendo_khachhang_IDKhach` (`IDKhach`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -178,7 +229,13 @@ ALTER TABLE `taikhoan`
 -- AUTO_INCREMENT for table `danhgia`
 --
 ALTER TABLE `danhgia`
-  MODIFY `IDDG` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDDG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `hoadon`
+--
+ALTER TABLE `hoadon`
+  MODIFY `IDHD` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
@@ -199,14 +256,40 @@ ALTER TABLE `menu`
   MODIFY `IDMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `tiendo`
+--
+ALTER TABLE `tiendo`
+  MODIFY `IDTD` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `danhgia`
+--
+ALTER TABLE `danhgia`
+  ADD CONSTRAINT `FK_danhgia_khachhang_IDKhach` FOREIGN KEY (`IDKhach`) REFERENCES `khachhang` (`IDKhach`),
+  ADD CONSTRAINT `FK_danhgia_khoahoc_IDKH` FOREIGN KEY (`IDKH`) REFERENCES `khoahoc` (`IDKH`);
+
+--
+-- Constraints for table `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD CONSTRAINT `FK_hoadon_khachhang_IDKhach` FOREIGN KEY (`IDKhach`) REFERENCES `khachhang` (`IDKhach`);
 
 --
 -- Constraints for table `khachhang`
 --
 ALTER TABLE `khachhang`
   ADD CONSTRAINT `FK_taikhoan_khachhang_email` FOREIGN KEY (`Email`) REFERENCES `taikhoan` (`Email`);
+
+--
+-- Constraints for table `tiendo`
+--
+ALTER TABLE `tiendo`
+  ADD CONSTRAINT `FK_tiendo_khachhang_IDKhach` FOREIGN KEY (`IDKhach`) REFERENCES `khachhang` (`IDKhach`),
+  ADD CONSTRAINT `FK_tiendo_khoahoc_IDKH` FOREIGN KEY (`IDKH`) REFERENCES `khoahoc` (`IDKH`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
