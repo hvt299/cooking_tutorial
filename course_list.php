@@ -55,7 +55,7 @@
                                     <div class="d-flex justify-content-around mb-4">
                                         <h4 class="price"><?php echo number_format($course['GiaHienTaiKH'],0,",",".")."<ins>đ</ins>"; ?></h4>
                                         <del><?php echo number_format($course['GiaGocKH'],0,",",".")."<ins>đ</ins>"; ?></del>
-                                        <button class="btn btn-primary" type="submit">Khám phá ngay</button>
+                                        <button class="btn btn-warning" type="submit">Khám phá ngay</button>
                                     </div>
                                 </div>
                             </div>

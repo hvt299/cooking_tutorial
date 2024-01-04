@@ -72,7 +72,7 @@
                                     <div class="d-flex justify-content-around mb-4">
                                         <h4 class="price"><?php echo number_format($course['GiaHienTaiKH'],0,",",".")."<ins>đ</ins>"; ?></h4>
                                         <del><?php echo number_format($course['GiaGocKH'],0,",",".")."<ins>đ</ins>"; ?></del>
-                                        <button class="btn btn-primary" type="submit">Khám phá ngay</button>
+                                        <button class="btn btn-warning" type="submit">Khám phá ngay</button>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
             </div>
         </section>
 
-        <!-- <section class="mb-3">
+        <section class="mb-3">
             <div class="py-5">
                 <h2 class="text-center"><i class="fa-solid fa-quote-left" style="font-size: 36px;"></i> CẢM NHẬN CỦA HỌC VIÊN</h2>
                 <div class="wrapper">
@@ -130,7 +130,7 @@
                                         <div class="card-content">
                                             <h2 class="name">
                                                 <?php
-                                                    echo $rating['TenHV'];
+                                                    echo $rating['TenKhach'];
                                                     echo "<br>";
                                                     echo $rating['TenKH'];
                                                 ?>
@@ -150,13 +150,13 @@
                                 <?php endforeach; ?>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     <!-- <div class="swiper-button-next swiper-navBtn"></div> -->
                     <!-- <div class="swiper-button-prev swiper-navBtn"></div> -->
                     <!-- <div class="swiper-pagination"></div> -->
-                <!-- </div>
+                </div>
             </div>
-        </section> -->
+        </section>
         
         <!-- Phần footer -->
         <?php include("view/footer.php"); ?>

@@ -169,20 +169,20 @@
                                         <div class="card-content">
                                             <h2 class="name">
                                                 <?php
-                                                    echo $rating['TenHV'];
+                                                    echo $rating['TenKhach'];
                                                     echo "<br>";
                                                     echo $rating['TenKH'];
                                                 ?>
                                             </h2>
                                             <p class="description">
-                                                <?php //for ($i = 1; $i <= $rating['SaoDG']; $i++): ?>
-                                                    <!-- <i class="fa-solid fa-star"></i> -->
-                                                <?php //endfor; ?>
-                                                <?php //for ($i = 1; $i <= 5 - $rating['SaoDG']; $i++): ?>
-                                                    <!-- <i class="fa-regular fa-star"></i> -->
-                                                <?php //endfor; ?>
+                                                <?php for ($i = 1; $i <= $rating['SaoDG']; $i++): ?>
+                                                    <i class="fa-solid fa-star"></i>
+                                                <?php endfor; ?>
+                                                <?php for ($i = 1; $i <= 5 - $rating['SaoDG']; $i++): ?>
+                                                    <i class="fa-regular fa-star"></i>
+                                                <?php endfor; ?>
                                                 <br>
-                                                <?php //echo $rating['NoiDungDG']; ?>
+                                                <?php echo $rating['NoiDungDG']; ?>
                                             </p>
                                         </div>
                                     </div>
