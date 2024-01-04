@@ -100,7 +100,7 @@
                     <?php } else { ?>
                         <p class="product-description">
                             Chưa có khóa học nào trong giỏ hàng<br>
-                            Cùng khám phá các khóa học tại Course Online nhé!
+                            Cùng khám phá các khóa học tại Cooking Tutorial nhé!
                         </p>
                     <?php } ?>
                 </div>

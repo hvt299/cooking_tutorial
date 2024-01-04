@@ -5,8 +5,8 @@
     require("model/connect_db.php");
     require("model/menu_db.php");
     require("model/course_db.php");
-    // require("model/rating_db.php");
-    // require("login_process.php");
+    require("model/rating_db.php");
+    require("login_process.php");
     $menu_list = get_menu();
     $course_list = get_course();
 
@@ -17,9 +17,8 @@
     }
 
     $course = get_course_by_id($course_id);
-    // $ratings = get_rating_by_course_id($course_id);
+    $ratings = get_rating_by_course_id($course_id);
 
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -111,7 +110,7 @@
                             <a href="#" class="card-title"><h2><?php echo $c['TenKH']; ?></h2></a>
                             <p class="card-text">
                             <?php
-                                /*$avg_star_rating = get_avg_star_rating_by_course_id(filter_input(INPUT_GET, "course_id"));
+                                $avg_star_rating = get_avg_star_rating_by_course_id(filter_input(INPUT_GET, "course_id"));
                                     if (!empty($avg_star_rating)) {
                                         foreach ($avg_star_rating as $avg){
                                             $avg_star_rating = $avg['avg_star_rating'];
@@ -119,14 +118,14 @@
                                         $avg_star_rating = round($avg_star_rating);
                                     }else {
                                         $avg_star_rating = 0;
-                                    }*/
+                                    }
                             ?>
-                            <?php /* for ($i = 1; $i <= $avg_star_rating; $i++): */?>
-                                <!-- <i class="fa-solid fa-star"></i> -->
-                                    <?php /* endfor; */?>
-                            <?php /*for ($i = 1; $i <= 5 - $avg_star_rating; $i++): */?>
-                                <!-- <i class="fa-regular fa-star"></i> -->
-                            <?php //endfor; ?>
+                            <?php for ($i = 1; $i <= $avg_star_rating; $i++): ?>
+                                <i class="fa-solid fa-star"></i>
+                                    <?php endfor; ?>
+                            <?php for ($i = 1; $i <= 5 - $avg_star_rating; $i++): ?>
+                                <i class="fa-regular fa-star"></i>
+                            <?php endfor; ?>
 
                                 <h4 class="card-text mt-2">
                                     <span class="text-primary"><?php echo number_format($c['GiaHienTaiKH'],0,",",".")."<ins>đ</ins>"; ?></span>
@@ -176,14 +175,14 @@
                                                 ?>
                                             </h2>
                                             <p class="description">
-                                                <?php for ($i = 1; $i <= $rating['SaoDG']; $i++): ?>
-                                                    <i class="fa-solid fa-star"></i>
-                                                <?php endfor; ?>
-                                                <?php for ($i = 1; $i <= 5 - $rating['SaoDG']; $i++): ?>
-                                                    <i class="fa-regular fa-star"></i>
-                                                <?php endfor; ?>
+                                                <?php //for ($i = 1; $i <= $rating['SaoDG']; $i++): ?>
+                                                    <!-- <i class="fa-solid fa-star"></i> -->
+                                                <?php //endfor; ?>
+                                                <?php //for ($i = 1; $i <= 5 - $rating['SaoDG']; $i++): ?>
+                                                    <!-- <i class="fa-regular fa-star"></i> -->
+                                                <?php //endfor; ?>
                                                 <br>
-                                                <?php echo $rating['NoiDungDG']; ?>
+                                                <?php //echo $rating['NoiDungDG']; ?>
                                             </p>
                                         </div>
                                     </div>
