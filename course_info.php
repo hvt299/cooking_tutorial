@@ -78,7 +78,7 @@
         }
 
         .btn-rating {
-            background-color: #3498db;
+            background-color: #ffc107;
             color: #fff;
             padding: 12px 20px;
             border: none;
@@ -224,30 +224,30 @@
                                     <img src="<?php echo $course['HinhAnhKH']; ?>" class="card-img-top" alt="">
                                     <div class="card-body">
                                         <a href="course_info.php?course_id=<?php echo $course['IDKH']; ?>"><h5 class="card-title"><?php echo $course['TenKH']; ?></h5></a>
-                                        <!-- <p class="card-text">
+                                        <p class="card-text">
                                             <?php
-                                                // $avg_star_rating = get_avg_star_rating_by_course_id($course['IDKH']);
-                                                // if (!empty($avg_star_rating)) {
-                                                //     foreach ($avg_star_rating as $avg){
-                                                //         $avg_star_rating = $avg['avg_star_rating'];
-                                                //     }
-                                                //     $avg_star_rating = round($avg_star_rating);
-                                                // }else {
-                                                //     $avg_star_rating = 0;
-                                                // }
+                                                $avg_star_rating = get_avg_star_rating_by_course_id($course['IDKH']);
+                                                if (!empty($avg_star_rating)) {
+                                                    foreach ($avg_star_rating as $avg){
+                                                        $avg_star_rating = $avg['avg_star_rating'];
+                                                    }
+                                                    $avg_star_rating = round($avg_star_rating);
+                                                }else {
+                                                    $avg_star_rating = 0;
+                                                }
                                             ?>
-                                            <?php //for ($i = 1; $i <= $avg_star_rating; $i++): ?>
+                                            <?php for ($i = 1; $i <= $avg_star_rating; $i++): ?>
                                             <i class="fa-solid fa-star"></i>
-                                            <?php //endfor; ?>
-                                            <?php //for ($i = 1; $i <= 5 - $avg_star_rating; $i++): ?>
+                                            <?php endfor; ?>
+                                            <?php for ($i = 1; $i <= 5 - $avg_star_rating; $i++): ?>
                                             <i class="fa-regular fa-star"></i>
-                                            <?php //endfor; ?>
-                                        </p> -->
+                                            <?php endfor; ?>
+                                        </p>
                                     </div>
                                     <div class="d-flex justify-content-around mb-4">
                                         <h4 class="price"><?php echo number_format($course['GiaHienTaiKH'],0,",",".")."<ins>đ</ins>"; ?></h4>
                                         <del><?php echo number_format($course['GiaGocKH'],0,",",".")."<ins>đ</ins>"; ?></del>
-                                        <button class="btn btn-primary" type="submit">Khám phá ngay</button>
+                                        <button class="btn btn-warning" type="submit">Khám phá ngay</button>
                                     </div>
                                 </div>
                             </div>
