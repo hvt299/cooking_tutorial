@@ -50,15 +50,16 @@
         return $my_rating;
     }
 
-    function add_rating($rating_id, $customer_id, $course_id, $review_content, $star_rating){
+    function add_rating($rating_id, $customer_id, $course_id, $review_content, $star_rating, $rating_date){
         global $db;
-        $query = 'INSERT INTO danhgia (IDDG, IDKhach, IDKH, NoiDungDG, SaoDG) VALUES (:rating_id, :customer_id, :course_id, :review_content, :star_rating)';
+        $query = 'INSERT INTO danhgia (IDDG, IDKhach, IDKH, NoiDungDG, SaoDG, NgayDG) VALUES (:rating_id, :customer_id, :course_id, :review_content, :star_rating, :rating_date)';
         $statement = $db->prepare($query);
         $statement->bindValue(':rating_id', $rating_id);
         $statement->bindValue(':customer_id', $customer_id);
         $statement->bindValue(':course_id', $course_id);
         $statement->bindValue(':review_content', $review_content);
         $statement->bindValue(':star_rating', $star_rating);
+        $statement->bindValue(':rating_date', $rating_date);
         $statement->execute();
         $statement->closeCursor();
     }
@@ -88,15 +89,16 @@
         $statement->closeCursor();
     }
 
-    function edit_rating($rating_id, $customer_id, $course_id, $review_content, $star_rating) {
+    function edit_rating($rating_id, $customer_id, $course_id, $review_content, $star_rating, $rating_date) {
         global $db;
-        $query = 'UPDATE danhgia SET IDKhach = :customer_id, IDKH = :course_id, NoiDungDG = :review_content, SaoDG = :star_rating WHERE IDDG = :rating_id';
+        $query = 'UPDATE danhgia SET IDKhach = :customer_id, IDKH = :course_id, NoiDungDG = :review_content, SaoDG = :star_rating, NgayDG = :rating_date WHERE IDDG = :rating_id';
         $statement = $db->prepare($query);
         $statement->bindValue(':rating_id', $rating_id);
         $statement->bindValue(':customer_id', $customer_id);
         $statement->bindValue(':course_id', $course_id);
         $statement->bindValue(':review_content', $review_content);
         $statement->bindValue(':star_rating', $star_rating);
+        $statement->bindValue(':rating_date', $rating_date);
         $statement->execute();
         $statement->closeCursor();
     }
