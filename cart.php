@@ -95,12 +95,15 @@
                             <div class="totals-value" id="cart-total"><?php echo number_format($grand_total, 0, ",", ".") . "<ins>đ</ins>"; ?></div>
                         </div>
                     </div>
-
-                    <button class="checkout">Tiếp tục thanh toán</button>
+                    <form action="cart_process.php" method="POST">
+                        <input type="hidden" name="action" value="payment">
+                        <input type="hidden" name="total" value="<?php echo $grand_total; ?>">
+                        <button class="checkout">Tiếp tục thanh toán</button>
+                    </form>
                     <?php } else { ?>
                         <p class="product-description">
-                            Chưa có khóa học nào trong giỏ hàng<br>
-                            Cùng khám phá các khóa học tại Cooking Tutorial nhé!
+                            Chưa có khóa học nấu ăn nào trong giỏ hàng<br>
+                            Cùng khám phá các khóa học nấu ăn tại Cooking Tutorial nhé!
                         </p>
                     <?php } ?>
                 </div>

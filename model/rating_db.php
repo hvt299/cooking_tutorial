@@ -24,7 +24,6 @@
 
     function get_rating_by_course_id($course_id) {
         global $db;
-        // them khachhang.ID
         $query = 'SELECT khachhang.TenKhach, khoahoc.IDKH, khoahoc.TenKH, NoiDungDG, SaoDG, khachhang.IDKhach
                   FROM khachhang, khoahoc, danhgia
                   WHERE khachhang.IDKhach = danhgia.IDKhach AND khoahoc.IDKH = danhgia.IDKH AND danhgia.IDKH = :idkh
@@ -35,6 +34,20 @@
         $ratings = $statement->fetchAll();
         $statement->closeCursor();
         return $ratings;
+    }
+
+    function get_rating_by_customer_id_course_id($customer_id, $course_id) {
+        global $db;
+        $query = 'SELECT khachhang.TenKhach, khoahoc.IDKH, khoahoc.TenKH, NoiDungDG, SaoDG, khachhang.IDKhach
+                  FROM khachhang, khoahoc, danhgia
+                  WHERE khachhang.IDKhach = danhgia.IDKhach AND danhgia.IDKhach = :idkhach AND khoahoc.IDKH = danhgia.IDKH AND danhgia.IDKH = :idkh;';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':idkhach', $customer_id);
+        $statement->bindValue(':idkh', $course_id);
+        $statement->execute();
+        $my_rating = $statement->fetchAll();
+        $statement->closeCursor();
+        return $my_rating;
     }
 
     function add_rating($rating_id, $customer_id, $course_id, $review_content, $star_rating){
@@ -49,7 +62,7 @@
         $statement->execute();
         $statement->closeCursor();
     }
-    // 2 them 2 ham
+
     function get_idrating_by_student_course($customer_id, $course_id) {
         global $db; 
         $query = 'SELECT IDDG FROM danhgia WHERE IDKhach = :customer_id AND IDKH = :course_id';

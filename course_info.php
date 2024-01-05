@@ -16,6 +16,23 @@
         $course_id = filter_input(INPUT_GET, 'course_id');
     }
 
+    if (isset($_COOKIE['idkhach'])){
+        $my_rating = get_rating_by_customer_id_course_id($_COOKIE['idkhach'], $course_id);
+        if (!empty($my_rating)){
+            foreach ($my_rating as $mr){
+                $review_content = $mr['NoiDungDG'];
+                $star_rating = $mr['SaoDG'];
+            }
+        }else{
+            $review_content = NULL;
+            $star_rating = NULL;
+        }
+    }else{
+        $my_rating = NULL;
+        $review_content = NULL;
+        $star_rating = NULL;
+    }
+
     $course = get_course_by_id($course_id);
     $ratings = get_rating_by_course_id($course_id);
 
@@ -204,10 +221,10 @@
             <form action="review_process.php" method="post">
                 <input type="hidden" name="course_id" value="<?php echo $course_id; ?>" />
                 <label for="review_content" class="review-title">Nội dung đánh giá:</label>
-                <textarea name="review_content" id="review_content" rows="4" required></textarea>
+                <textarea name="review_content" id="review_content" rows="4" required><?php echo $review_content; ?></textarea>
 
                 <label for="star_rating" class="review-title">Số sao (1-5):</label>
-                <input type="number" name="star_rating" id="star_rating" min="1" max="5" required />
+                <input type="number" name="star_rating" id="star_rating" value="<?php echo $star_rating; ?>" min="1" max="5" required />
 
                 <button class="btn-rating" type="submit">Gửi Đánh Giá</button>
             </form>

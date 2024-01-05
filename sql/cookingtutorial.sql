@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2024 at 10:34 PM
+-- Generation Time: Jan 05, 2024 at 12:36 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `cookingtutorial`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chitiethoadon`
+--
+
+CREATE TABLE `chitiethoadon` (
+  `IDCTHD` int(11) NOT NULL,
+  `IDHD` int(11) NOT NULL,
+  `IDKH` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `chitiethoadon`
+--
+
+INSERT INTO `chitiethoadon` (`IDCTHD`, `IDHD`, `IDKH`) VALUES
+(3, 4, 4),
+(4, 4, 3),
+(5, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -41,8 +62,10 @@ CREATE TABLE `danhgia` (
 --
 
 INSERT INTO `danhgia` (`IDDG`, `IDKhach`, `IDKH`, `NoiDungDG`, `SaoDG`, `NgayDG`) VALUES
-(1, 2, 2, 'OK', 1, '2024-01-05 00:59:00'),
-(2, 2, 4, '!OK', 2, '2024-01-05 01:02:53');
+(1, 2, 2, 'OK', 4, '2024-01-05 00:59:00'),
+(2, 2, 4, 'Tuyệt vời', 4, '2024-01-05 01:02:53'),
+(3, 2, 1, 'Tốt, món ăn khá ngon miệng!', 5, '2024-01-05 17:33:55'),
+(4, 2, 3, 'Tốt!', 5, '2024-01-05 17:34:20');
 
 -- --------------------------------------------------------
 
@@ -53,9 +76,18 @@ INSERT INTO `danhgia` (`IDDG`, `IDKhach`, `IDKH`, `NoiDungDG`, `SaoDG`, `NgayDG`
 CREATE TABLE `hoadon` (
   `IDHD` int(11) NOT NULL,
   `IDKhach` int(11) NOT NULL,
-  `TongTien` int(11) NOT NULL,
+  `TongThanhToan` int(11) NOT NULL,
+  `NgayMua` datetime NOT NULL DEFAULT current_timestamp(),
   `TinhTrang` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `hoadon`
+--
+
+INSERT INTO `hoadon` (`IDHD`, `IDKhach`, `TongThanhToan`, `NgayMua`, `TinhTrang`) VALUES
+(4, 2, 2938950, '2024-01-05 18:29:57', 'Thành công'),
+(5, 2, 1048950, '2024-01-05 18:31:13', 'Đang xử lý');
 
 -- --------------------------------------------------------
 
@@ -170,8 +202,25 @@ CREATE TABLE `tiendo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Dumping data for table `tiendo`
+--
+
+INSERT INTO `tiendo` (`IDTD`, `IDKhach`, `IDKH`, `NgayBatDau`) VALUES
+(7, 2, 4, '2024-01-05 18:29:57'),
+(8, 2, 3, '2024-01-05 18:29:57'),
+(9, 2, 1, '2024-01-05 18:31:13');
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `chitiethoadon`
+--
+ALTER TABLE `chitiethoadon`
+  ADD PRIMARY KEY (`IDCTHD`),
+  ADD KEY `FK_chitiethoadon_hoadon_IDHD` (`IDHD`),
+  ADD KEY `FK_chitiethoadon_khoahoc_IDKH` (`IDKH`);
 
 --
 -- Indexes for table `danhgia`
@@ -226,16 +275,22 @@ ALTER TABLE `tiendo`
 --
 
 --
+-- AUTO_INCREMENT for table `chitiethoadon`
+--
+ALTER TABLE `chitiethoadon`
+  MODIFY `IDCTHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `danhgia`
 --
 ALTER TABLE `danhgia`
-  MODIFY `IDDG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `IDDG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `IDHD` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
@@ -259,11 +314,18 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `tiendo`
 --
 ALTER TABLE `tiendo`
-  MODIFY `IDTD` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDTD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `chitiethoadon`
+--
+ALTER TABLE `chitiethoadon`
+  ADD CONSTRAINT `FK_chitiethoadon_hoadon_IDHD` FOREIGN KEY (`IDHD`) REFERENCES `hoadon` (`IDHD`),
+  ADD CONSTRAINT `FK_chitiethoadon_khoahoc_IDKH` FOREIGN KEY (`IDKH`) REFERENCES `khoahoc` (`IDKH`);
 
 --
 -- Constraints for table `danhgia`
