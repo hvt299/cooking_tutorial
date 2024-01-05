@@ -84,7 +84,7 @@
                 $star_rating = filter_input(INPUT_POST, 'saodanhgia');
                 $rating_date = filter_input(INPUT_POST, "ngaydanhgia");
 
-                if (!empty($customer_id) && !empty($course_id) && !empty($review_content) && !empty($star_rating)){
+                if (!empty($customer_id) && !empty($course_id) && !empty($review_content) && !empty($star_rating) && !empty($rating_date)){
                     add_rating("", $customer_id, $course_id, $review_content, $star_rating, $rating_date);
                     echo "<script>alert('Thêm thành công!'); location.href='table.php?action=danhgia';</script>";
                 } else {

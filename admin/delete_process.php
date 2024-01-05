@@ -1,46 +1,66 @@
 <?php
     if (isset($_POST['delete_btn']) && isset($_POST['action'])){
-        require("../model/connectdb.php");
-        require("../model/newsdb.php");
-        require("../model/guestdb.php");
-        require("../model/identifydb.php");
-        require("../model/characterdb.php");
+        require("../model/connect_db.php");
+        require("../model/identify_db.php");
+        require("../model/customer_db.php");
+        require("../model/course_db.php");
+        require("../model/rating_db.php");
+        require("../model/progress_db.php");
+        require("../model/bill_db.php");
 
         switch ($_POST['action']){
             case 'taikhoan':
                 $email = filter_input(INPUT_POST, "delete_id");
                 if (!empty($email)){
-                    delete_acc($email);
+                    delete_account($email);
                     echo "<script>alert('Xóa thành công!'); location.href='table.php?action=taikhoan';</script>";
                 } else {
                     echo "<script>alert('Xóa thất bại!'); location.href='table.php?action=taikhoan';</script>";
                 }
                 break;
             case 'khach':
-                $guest_id = filter_input(INPUT_POST, "delete_id");
-                if (!empty($guest_id)){
-                    delete_guest($guest_id);
+                $customer_id = filter_input(INPUT_POST, "delete_id");
+                if (!empty($customer_id)){
+                    delete_customer($customer_id);
                     echo "<script>alert('Xóa thành công!'); location.href='table.php?action=khach';</script>";
                 } else {
                     echo "<script>alert('Xóa thất bại!'); location.href='table.php?action=khach';</script>";
                 }
                 break;
-            case 'news':
-                $news_id = filter_input(INPUT_POST, "delete_id");
-                if (!empty($news_id)){
-                    delete_news($news_id);
-                    echo "<script>alert('Xóa thành công!'); location.href='table.php?action=news';</script>";
+            case 'khoahoc':
+                $course_id = filter_input(INPUT_POST, "delete_id");
+                if (!empty($course_id)){
+                    delete_course($course_id);
+                    echo "<script>alert('Xóa thành công!'); location.href='table.php?action=khoahoc';</script>";
                 } else {
-                    echo "<script>alert('Xóa thất bại!'); location.href='table.php?action=news';</script>";
+                    echo "<script>alert('Xóa thất bại!'); location.href='table.php?action=khoahoc';</script>";
                 }
                 break;
-            case 'nhanvat':
-                $nv_id = filter_input(INPUT_POST, "delete_id");
-                if (!empty($nv_id)){
-                    delete_nv($nv_id);
-                    echo "<script>alert('Xóa thành công!'); location.href='table.php?action=nhanvat';</script>";
+            case 'hoadon':
+                $bill_id = filter_input(INPUT_POST, "delete_id");
+                if (!empty($bill_id)){
+                    delete_bill($bill_id);
+                    echo "<script>alert('Xóa thành công!'); location.href='table.php?action=hoadon';</script>";
                 } else {
-                    echo "<script>alert('Xóa thất bại!'); location.href='table.php?action=nhanvat';</script>";
+                    echo "<script>alert('Xóa thất bại!'); location.href='table.php?action=hoadon';</script>";
+                }
+                break;
+            case 'danhgia':
+                $rating_id = filter_input(INPUT_POST, "delete_id");
+                if (!empty($rating_id)){
+                    delete_rating($rating_id);
+                    echo "<script>alert('Xóa thành công!'); location.href='table.php?action=danhgia';</script>";
+                } else {
+                    echo "<script>alert('Xóa thất bại!'); location.href='table.php?action=danhgia';</script>";
+                }
+                break;
+            case 'tiendo':
+                $progress_id = filter_input(INPUT_POST, "delete_id");
+                if (!empty($progress_id)){
+                    delete_progress($progress_id);
+                    echo "<script>alert('Xóa thành công!'); location.href='table.php?action=tiendo';</script>";
+                } else {
+                    echo "<script>alert('Xóa thất bại!'); location.href='table.php?action=tiendo';</script>";
                 }
                 break;
         }

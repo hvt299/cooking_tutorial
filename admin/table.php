@@ -458,7 +458,7 @@
                                                 case 'khach':
                                                     echo "Sửa khách hàng";
                                                     break;
-                                                case 'course':
+                                                case 'khoahoc':
                                                     echo "Sửa khóa học";
                                                     break;
                                                 case 'hoadon';
@@ -501,6 +501,10 @@
                                                 <label>Mật khẩu ứng dụng</label>
                                                 <input type="text" name="matkhauungdung" id="value_5" class="form-control" placeholder="Nhập mật khẩu ứng dụng">
                                             </div>
+                                            <div class="form-group">
+                                                <label>Ngày tạo</label>
+                                                <input type="text" name="ngaytao" id="value_6" class="form-control" placeholder="Nhập ngày tạo">
+                                            </div>
                                             <?php break; ?>
 
                                             <?php case "khach": ?>
@@ -514,6 +518,14 @@
                                                     <input type="text" name="gioitinh" id="value_3" class="form-control" placeholder="Nhập giới tính">
                                                 </div>
                                                 <div class="form-group">
+                                                    <label>Ngày Sinh</label>
+                                                    <input type="text" name="ngaysinh" id="value_4" class="form-control" placeholder="Nhập ngày sinh">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Quê Quán</label>
+                                                    <input type="text" name="quequan" id="value_5" class="form-control" placeholder="Nhập quê quán">
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Email</label>
                                                     <input type="email" name="email" id="value_6" class="form-control" placeholder="Nhập email" required>
                                                 </div>
@@ -523,35 +535,90 @@
                                                 </div>
                                             <?php break; ?>
 
-                                            <?php case "course": ?>
-                                                <!-- Sửa tin -->
+                                            <?php case "khoahoc": ?>
+                                                <!-- Sửa khóa học -->
                                                 <div class="form-group">
-                                                    <label>Tên tin tức</label>
-                                                    <input type="text" name="coursename" id="value_2" class="form-control" placeholder="Nhập tên tin tức" required>
+                                                    <label>Tên khóa học</label>
+                                                    <input type="text" name="tenkhoahoc" id="value_2" class="form-control" placeholder="Nhập tên khóa học" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Hình ảnh</label>
-                                                    <input type="text" name="hinhanh" id="value_4" class="form-control" placeholder="Nhập đường dẫn hình ảnh" required>
+                                                    <label>Tác giả</label>
+                                                    <input type="text" name="tacgia" id="value_3" class="form-control" placeholder="Nhập tác giả" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Mô tả</label>
-                                                    <input type="text" name="mota" id="value_8" class="form-control" placeholder="Nhập mô tả" required>
+                                                    <input type="text" name="mota" id="value_4" class="form-control" placeholder="Nhập mô tả" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Giá gốc</label>
+                                                    <input type="text" name="giagoc" id="value_5" class="form-control" placeholder="Nhập giá gốc" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Giá hiện tại</label>
+                                                    <input type="text" name="giahientai" id="value_6" class="form-control" placeholder="Nhập giá hiện tại" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Hình ảnh</label>
+                                                    <input type="text" name="hinhanh" id="value_7" class="form-control" placeholder="Nhập đường dẫn hình ảnh" required>
                                                 </div>
                                             <?php break; ?>
 
                                             <?php case "hoadon": ?>
                                                 <!-- Sửa hoadon -->
                                                 <div class="form-group">
-                                                    <label>Tên Nhân Vật</label>
-                                                    <input type="text" name="idnv" id="value_2" class="form-control" placeholder="Nhập Tên" required>
+                                                    <label>ID Khách</label>
+                                                    <input type="text" name="idk" id="value_2" class="form-control" placeholder="Nhập ID" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Mô tả</label>
-                                                    <input type="text" name="mota" id="value_8" class="form-control" placeholder="Nhập nội dung" required>
+                                                    <label>Tổng Thanh Toán</label>
+                                                    <input type="text" name="tongthanhtoan" id="value_3" class="form-control" placeholder="Nhập Số tiền" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Hình ảnh</label>
-                                                    <input type="text" name="hinhanh" id="value_4" class="form-control" placeholder="Nhập đường dẫn hình ảnh" required>
+                                                    <label>Ngày Mua</label>
+                                                    <input type="text" name="ngaymua" id="value_4" class="form-control" placeholder="Nhập ngày mua" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Tình Trạng</label>
+                                                    <input type="text" name="tinhtrang" id="value_5" class="form-control" placeholder="Nhập tình trạng" required>
+                                                </div>
+                                            <?php break; ?>
+
+                                            <?php case "danhgia": ?>
+                                                <!-- Sửa đánh giá -->
+                                                <div class="form-group">
+                                                    <label>ID Khách</label>
+                                                    <input type="text" name="idk" id="value_2" class="form-control" placeholder="Nhập ID Khách" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>IDKH</label>
+                                                    <input type="text" name="idkh" id="value_3" class="form-control" placeholder="Nhập IDKH" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Nội dung</label>
+                                                    <input type="text" name="noidung" id="value_4" class="form-control" placeholder="Nhập nội dung" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Sao đánh giá</label>
+                                                    <input type="text" name="saodanhgia" id="value_5" class="form-control" placeholder="Nhập sao đánh giá (1-5)" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Ngày đánh giá</label>
+                                                    <input type="text" name="ngaydanhgia" id="value_6" class="form-control" placeholder="Nhập ngày đánh giá" required>
+                                                </div>
+                                            <?php break; ?>
+                                            <?php case "tiendo": ?>
+                                                <!-- Sửa tiến độ -->
+                                                <div class="form-group">
+                                                    <label>ID Khách</label>
+                                                    <input type="text" name="idk" id="value_2" class="form-control" placeholder="Nhập ID khách" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>ID Khóa Học</label>
+                                                    <input type="text" name="idkh" id="value_3" class="form-control" placeholder="Nhập ID khóa học" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Ngày Bắt Đầu</label>
+                                                    <input type="text" name="ngaybatdau" id="value_4" class="form-control" placeholder="Nhập ngày bắt đầu" required>
                                                 </div>
                                             <?php break; ?>
                                         <?php endswitch; ?>
@@ -598,7 +665,7 @@
                                     <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="#" method="POST">
+                                <form action="delete_process.php" method="POST">
                                     <div class="modal-body">
                                         <input type="hidden" name="action" value="<?php echo $action; ?>">
                                         <input type="hidden" name="delete_id" id="delete_id">
@@ -713,7 +780,7 @@
                                             <?php break; ?>
 
                                             <?php case "khoahoc": ?>
-                                                <!-- Bảng kh -->
+                                                <!-- Bảng khóa học -->
                                             <th>IDKH</th>
                                             <th>Tên Khóa Học</th>
                                             <th>Tác Giả KH</th>
@@ -725,7 +792,7 @@
                                             <?php break; ?>
 
                                             <?php case "hoadon": ?>
-                                                <!-- Bảng hoadon -->
+                                                <!-- Bảng hóa đơn -->
                                             <th>IDHD</th>
                                             <th>ID Khách</th>
                                             <th>Tổng Thanh Toán</th>
@@ -797,7 +864,7 @@
                                         <?php break; ?>
 
                                         <?php case "khoahoc": ?>
-                                            <!-- Bảng tin tuc -->
+                                            <!-- Bảng khóa học -->
                                         <?php foreach ($course_list as $course): ?>
                                         <tr>
                                             <td><?php echo $course['IDKH']; ?></td>
@@ -816,7 +883,7 @@
                                         <?php break; ?>
 
                                         <?php case "danhgia": ?>
-                                            <!-- Bảng nhan vat -->
+                                            <!-- Bảng đánh giá -->
                                         <?php foreach ($rating_list as $r): ?>
                                         <tr>
                                             <td><?php echo $r['IDDG']; ?></td>                                            
@@ -956,7 +1023,6 @@
                     $('#value_5').val(data[4]);
                     $('#value_6').val(data[5]);
                     $('#value_7').val(data[6]);
-                    $('#value_8').val(data[7]);
             });
         });
     </script>
