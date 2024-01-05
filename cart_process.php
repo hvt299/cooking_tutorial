@@ -67,7 +67,7 @@ if (isset($_POST) && !empty($_POST)){
 
                     // Thêm vào bảng tiendo
                     foreach ($_SESSION['cart_item'] as $val_cart_item){
-                        add_process("", $_COOKIE['idkhach'], $val_cart_item['IDKH'], $order_date);
+                        add_progress("", $_COOKIE['idkhach'], $val_cart_item['IDKH'], $order_date);
                     }
 
                     // Thêm vào bảng chitiethoadon

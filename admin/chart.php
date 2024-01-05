@@ -1,20 +1,14 @@
 <?php
     session_start();
     require("../model/connect_db.php");
-    require("../model/course_db.php");
-    require("../model/customer_db.php");
     require("../model/identify_db.php");
-    require("../model/rating_db.php");
 
-    $course_number = get_course_number();
-    $customer_number = get_customer_number();
-    $avg_star_rating = get_avg_star_rating();
-    $rating_number = get_rating_number();
+    $acc_type_number = get_acc_type_number();
 
-    // foreach ($acc_type_number as $acc){
-    //     $role[] = $acc['VaiTro'];
-    //     $number[] = $acc['SoLuongLoaiTaiKhoan'];
-    // }
+    foreach ($acc_type_number as $acc){
+        $role[] = $acc['VaiTro'];
+        $number[] = $acc['SoLuongLoaiTaiKhoan'];
+    }
 
     if (!isset($_COOKIE['vaitro']) || $_COOKIE['vaitro'] != "Quản lý"){
         echo "<script>alert('Vui lòng đăng nhập với quyền quản lý để tiếp tục!');location.href='../login.php';</script>";
@@ -23,10 +17,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><?php echo $_COOKIE['username']; ?> - Dashboard</title>
+
+    <title><?php echo $_COOKIE['username']; ?> - Charts</title>
 
     <!-- Custom fonts for this template-->
     <script src="https://kit.fontawesome.com/73d99ea241.js" crossorigin="anonymous"></script>
@@ -58,7 +54,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -73,7 +69,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTables"
                     aria-expanded="true" aria-controls="collapseTables">
                     <i class="fas fa-fw fa-table"></i>
@@ -84,22 +80,55 @@
                         <h6 class="collapse-header">Danh sách các bảng:</h6>
                         <form action="table.php" method="GET">
                             <a class="collapse-item" href="table.php?action=taikhoan">Tài khoản</a>
-                            <a class="collapse-item" href="table.php?action=khach">Khách Hàng</a>
-                            <a class="collapse-item" href="table.php?action=khoahoc">Khóa Học</a>
-                            <a class="collapse-item" href="table.php?action=hoadon">Hóa Đơn</a>
-                            <a class="collapse-item" href="table.php?action=danhgia">Đánh Giá</a>
-                            <a class="collapse-item" href="table.php?action=tiendo">Tiến Độ</a>
+                            <a class="collapse-item" href="table.php?action=hocvien">Học viên</a>
+                            <a class="collapse-item" href="table.php?action=khoahoc">Khóa học</a>
+                            <a class="collapse-item" href="table.php?action=danhgia">Đánh giá</a>
                         </form>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+            <li class="nav-item active">
+                <a class="nav-link" href="chart.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
             </li>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Components</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div>
+            </li> -->
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Utilities</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Utilities:</h6>
+                        <a class="collapse-item" href="utilities-color.html">Colors</a>
+                        <a class="collapse-item" href="utilities-border.html">Borders</a>
+                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                    </div>
+                </div>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -145,13 +174,6 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>CO Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-            </div>
-
         </ul>
         <!-- End of Sidebar -->
 
@@ -165,9 +187,11 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
+                    <form class="form-inline">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </form>
 
                     <!-- Topbar Search -->
                     <form
@@ -231,7 +255,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">Ngày 01/12/2023</div>
+                                        <div class="small text-gray-500">01/12/2023</div>
                                         <span class="font-weight-bold">Chào tháng 12!</span>
                                     </div>
                                 </a>
@@ -368,146 +392,93 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <h1 class="h6 mb-2 text-gray-600">
-                        <?php
-                            $currentDateTime = date('d/m/y H:i:s');
-                            $datetime = DateTime::createFromFormat('d/m/y H:i:s', $currentDateTime);
-                            $zone_Asia_Ho_Chi_Minh = new DateTimeZone('Asia/Ho_Chi_Minh');
-                            $datetime->setTimezone($zone_Asia_Ho_Chi_Minh);
-                            echo "Ngày giờ hiện tại: " .$datetime->format('d/m/y H:i:s');
-                        ?>
-                        <br>
-                    </h1>
-
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Bảng điều khiển</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> In báo cáo</a>
-                    </div>
+                    <h1 class="h3 mb-2 text-gray-800">Thống kê</h1>
+                    <p class="mb-4">Trang quản lý các biểu đồ</p>
 
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- News Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="col-xl-8 col-lg-7">
+
+                            <!-- Area Chart -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Doanh thu theo tháng</h6>
+                                </div>
                                 <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Số Lượng Khóa Học</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <?php
-                                                    foreach($course_number as $course_num){
-                                                        echo $course_num['SoLuongKhoaHoc'];
-                                                    }
-                                                ?>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fa-solid fa-layer-group fa-2x text-gray-300"></i>
-                                        </div>
+                                    <div class="chart-area">
+                                        <canvas id="myAreaChart"></canvas>
                                     </div>
+                                    <hr>
+                                    Styling for the area chart can be found in the
+                                    <code>/js/demo/chart-area-demo.js</code> file.
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Customer Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
+                            <!-- Bar Chart -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Số lượng học viên theo tháng</h6>
+                                </div>
                                 <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Số lượng Khách Hàng</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <?php
-                                                    foreach($customer_number as $customer_num){
-                                                        echo $customer_num['SoLuongKhachHang'];
-                                                    }
-                                                ?>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fa-solid fa-user fa-2x text-gray-300"></i>
-                                        </div>
+                                    <div class="chart-bar">
+                                        <canvas id="myBarChart"></canvas>
                                     </div>
+                                    <hr>
+                                    Styling for the bar chart can be found in the
+                                    <code>/js/demo/chart-bar-demo.js</code> file.
                                 </div>
                             </div>
+
                         </div>
 
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                Tỉ lệ phản hồi tích cực</div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                        <?php
-                                                            foreach($avg_star_rating as $avg_star){
-                                                                echo $avg_star['TiLeDanhGia']*20;
-                                                                echo "%";
-                                                            }
-                                                        ?>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width:
-                                                                <?php
-                                                                    foreach($avg_star_rating as $avg_star){
-                                                                        echo $avg_star['TiLeDanhGia']*20;
-                                                                        echo "%";
-                                                                    }
-                                                                ?>"
-                                                            aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fa-solid fa-star fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
+                        <!-- Donut Chart -->
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tài khoản</h6>
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
+                                <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Lượt đánh giá khóa học</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                    <?php
-                                                        foreach($rating_number as $rating_num){
-                                                            echo $rating_num['SoLuongDanhGia'];
-                                                        }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
+                                    <div class="chart-pie pt-4">
+                                        <canvas id="myPieChart"></canvas>
                                     </div>
+                                    <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-primary"></i> Học viên
+                                        </span>
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-success"></i> Quản lý
+                                        </span>
+                                        <!-- <span class="mr-2">
+                                            <i class="fas fa-circle text-info"></i> Giảng viên
+                                        </span> -->
+                                    </div>
+                                    <hr>
+                                    Thống kê số lượng tài khoản đang được sử dụng trong hệ thống.
+                                    <code>(Học viên, quản lý)</code>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Content Row -->
+                </div>
+                <!-- /.container-fluid -->
 
-                    
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>&copy; <?php echo date("Y"); ?> Course Online, Inc. All rights reserved.</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
@@ -555,7 +526,7 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
-    
+
     <!-- <script src="js/demo/chart-pie-demo.js"></script> -->
     <script>
         // Set new default font family and font color to mimic Bootstrap's default styling
@@ -596,7 +567,9 @@
         },
         });
     </script>
+    <script src="js/demo/chart-bar-demo.js"></script>
 
 </body>
+
 </html>
-<?php }  ?>
+<?php } ?>
