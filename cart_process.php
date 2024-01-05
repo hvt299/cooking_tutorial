@@ -2,6 +2,9 @@
 session_start();
 require('model/connect_db.php');
 require('model/course_db.php');
+require('model/bill_db.php');
+require('model/bill_detail_db.php');
+require('model/progress_db.php');
 
 if (isset($_POST) && !empty($_POST)){
     if (isset($_POST['action'])){
@@ -50,6 +53,34 @@ if (isset($_POST) && !empty($_POST)){
                     }
                     header("Location: cart.php");
                 }
+                break;
+            case 'payment':                
+                // Thêm vào bảng hoadon
+                $total = $_POST['total'];
+                $currentDateTime = date('Y-m-d H:i:s');
+                $datetime = DateTime::createFromFormat('Y-m-d H:i:s', $currentDateTime);
+                $zone_Asia_Ho_Chi_Minh = new DateTimeZone('Asia/Ho_Chi_Minh');
+                $datetime->setTimezone($zone_Asia_Ho_Chi_Minh);
+                $order_date = $datetime->format('Y-m-d H:i:s');
+                add_bill("", $_COOKIE['idkhach'], $total, $order_date, "Đang xử lý");
+
+                // Thêm vào bảng tiendo
+                foreach ($_SESSION['cart_item'] as $val_cart_item){
+                    add_process("", $_COOKIE['idkhach'], $val_cart_item['IDKH'], $order_date);
+                }
+
+                // Thêm vào bảng chitiethoadon
+                $bill_id = get_current_bill_id($_COOKIE['idkhach'], $total, $order_date, "Đang xử lý");
+                foreach ($bill_id as $id){
+                    $bill_id = $id['IDHD'];
+                }
+                foreach ($_SESSION['cart_item'] as $val_cart_item){
+                    add_bill_detail("", $bill_id, $val_cart_item['IDKH']);
+                }
+
+                // Xóa thông tin khóa học trong giỏ hàng
+                unset($_SESSION['cart_item']);
+                echo "<script>alert('Thanh toán thành công!'); location.href='index.php';</script>";
                 break;
         }
     }
