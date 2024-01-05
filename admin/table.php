@@ -7,6 +7,7 @@
     require("../model/rating_db.php");
     require("../model/progress_db.php");
     require("../model/bill_db.php");
+    require("../model/bill_detail_db.php");
 
 
 
@@ -20,6 +21,7 @@
     $course_list = get_course();
     $rating_list = get_rating_2();
     $bill_list = get_bill();
+    $bill_detail_list = get_bill_detail();
     $process_list = get_progress();
 
 
@@ -99,6 +101,7 @@
                             <a class="collapse-item" href="table.php?action=khach">Khách Hàng</a>
                             <a class="collapse-item" href="table.php?action=khoahoc">Khóa Học</a>
                             <a class="collapse-item" href="table.php?action=hoadon">Hóa Đơn</a>
+                            <a class="collapse-item" href="table.php?action=chitiethoadon">Chi Tiết Hóa Đơn</a>
                             <a class="collapse-item" href="table.php?action=danhgia">Đánh Giá</a>
                             <a class="collapse-item" href="table.php?action=tiendo">Tiến Độ</a>
                         </form>
@@ -249,6 +252,9 @@
                                 case 'hoadon';
                                     echo "Quản lý hóa đơn";
                                     break;
+                                case 'chitiethoadon';
+                                    echo "Quản lý chi tiết hóa đơn";
+                                    break;
                                 case 'tiendo';
                                     echo "Quản lý tiến độ";
                                     break;
@@ -276,6 +282,9 @@
                                                     break;
                                                 case 'hoadon';
                                                     echo "Thêm hóa đơn";
+                                                    break;
+                                                case 'chitiethoadon';
+                                                    echo "Thêm chi tiết hóa đơn";
                                                     break;
                                                 case 'danhgia';
                                                     echo "Thêm đánh giá";
@@ -394,6 +403,18 @@
                                                 </div>
                                             <?php break; ?>
 
+                                            <?php case "chitiethoadon": ?>
+                                                <!-- Thêm chi tiết hóa đơn -->
+                                                <div class="form-group">
+                                                    <label>ID Hóa đơn</label>
+                                                    <input type="text" name="idhd" class="form-control" placeholder="Nhập ID hóa đơn" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>ID Khóa học</label>
+                                                    <input type="text" name="idkh" class="form-control" placeholder="Nhập ID khóa học" required>
+                                                </div>                                                
+                                            <?php break; ?>
+
                                             <?php case "danhgia": ?>
                                                 <!-- Thêm đánh giá -->
                                                 <div class="form-group">
@@ -463,6 +484,9 @@
                                                     break;
                                                 case 'hoadon';
                                                     echo "Sửa hóa đơn";
+                                                    break;
+                                                case 'chitiethoadon';
+                                                    echo "Sửa chi tiết hóa đơn";
                                                     break;
                                                 case 'danhgia';
                                                     echo "Sửa đánh giá";
@@ -583,6 +607,18 @@
                                                 </div>
                                             <?php break; ?>
 
+                                            <?php case "chitiethoadon": ?>
+                                                <!-- Sửa chi tiết hóa đơn -->
+                                                <div class="form-group">
+                                                    <label>ID Hóa đơn</label>
+                                                    <input type="text" name="idhd" id="value_2" class="form-control" placeholder="Nhập ID hóa đơn" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>ID Khóa học</label>
+                                                    <input type="text" name="idkh" id="value_3" class="form-control" placeholder="Nhập ID khóa học" required>
+                                                </div>                                                
+                                            <?php break; ?>
+
                                             <?php case "danhgia": ?>
                                                 <!-- Sửa đánh giá -->
                                                 <div class="form-group">
@@ -652,6 +688,9 @@
                                                 case 'hoadon';
                                                     echo "Xóa hóa đơn";
                                                     break;
+                                                case 'chitiethoadon';
+                                                    echo "Xóa chi tiết hóa đơn";
+                                                    break;
                                                 case 'danhgia';
                                                     echo "Xóa đánh giá";
                                                     break;
@@ -688,6 +727,11 @@
                                             <?php case "hoadon": ?>
                                                 <!-- Xóa hóa đơn -->
                                                 <label>Bạn có muốn xóa hóa đơn này không?</label>
+                                            <?php break; ?>
+
+                                            <?php case "chitiethoadon": ?>
+                                                <!-- Xóa chi tiết hóa đơn -->
+                                                <label>Bạn có muốn xóa chi tiết hóa đơn này không?</label>
                                             <?php break; ?>
 
                                             <?php case "danhgia": ?>
@@ -735,6 +779,11 @@
                                             echo "Bảng hóa đơn&emsp;";
                                             # Button trigger modal
                                             echo "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#add'>Thêm hóa đơn</button>";
+                                            break;
+                                         case 'chitiethoadon';
+                                            echo "Bảng chi tiết hóa đơn&emsp;";
+                                            # Button trigger modal
+                                            echo "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#add'>Thêm chi tiết hóa đơn</button>";
                                             break;
                                         case 'danhgia';
                                             echo "Bảng đánh giá&emsp;";
@@ -798,6 +847,14 @@
                                             <th>Tổng Thanh Toán</th>
                                             <th>Ngày Mua</th>
                                             <th>Tình Trạng</th>
+                                            <th>Thao Tác</th>
+                                            <?php break; ?>
+
+                                            <?php case "chitiethoadon": ?>
+                                                <!-- Bảng chi tiết hóa đơn -->
+                                            <th>IDCTHD</th>
+                                            <th>ID Hóa đơn</th>
+                                            <th>ID Khóa học</th>
                                             <th>Thao Tác</th>
                                             <?php break; ?>
 
@@ -910,6 +967,21 @@
                                             <td><?php echo $bill['TongThanhToan']; ?></td>
                                             <td><?php echo $bill['NgayMua']; ?></td>
                                             <td><?php echo $bill['TinhTrang']; ?></td>
+                                            <td>
+                                                <button type="submit" name="edit_btn" class="btn btn-success edit-btn">Sửa</button>
+                                                <button type="submit" name="delete_btn" class="btn btn-danger delete-btn">Xóa</button>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                        <?php break; ?>
+
+                                        <?php case "chitiethoadon": ?>
+                                            <!-- Bảng chi tiết hóa đơn -->
+                                        <?php foreach ($bill_detail_list as $bill_detail): ?>
+                                        <tr>
+                                            <td><?php echo $bill_detail['IDCTHD']; ?></td>
+                                            <td><?php echo $bill_detail['IDHD']; ?></td>
+                                            <td><?php echo $bill_detail['IDKH']; ?></td>
                                             <td>
                                                 <button type="submit" name="edit_btn" class="btn btn-success edit-btn">Sửa</button>
                                                 <button type="submit" name="delete_btn" class="btn btn-danger delete-btn">Xóa</button>

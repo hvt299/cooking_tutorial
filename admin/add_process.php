@@ -7,6 +7,7 @@
         require("../model/rating_db.php");
         require("../model/progress_db.php");
         require("../model/bill_db.php");
+        require("../model/bill_detail_db.php");
 
         switch ($_POST['action']){
             case 'taikhoan':
@@ -75,6 +76,17 @@
                     echo "<script>alert('Thêm thành công!'); location.href='table.php?action=hoadon';</script>";
                 } else {
                     echo "<script>alert('Thêm thất bại!'); location.href='table.php?action=hoadon';</script>";
+                }
+                break;
+            case 'chitiethoadon':
+                $bill_id = filter_input(INPUT_POST, "idhd");
+                $course_id = filter_input(INPUT_POST, "idkh");
+
+                if (!empty($bill_id) && !empty($course_id)){
+                    add_bill_detail("", $bill_id, $course_id);
+                    echo "<script>alert('Thêm thành công!'); location.href='table.php?action=chitiethoadon';</script>";
+                } else {
+                    echo "<script>alert('Thêm thất bại!'); location.href='table.php?action=chitiethoadon';</script>";
                 }
                 break;
             case 'danhgia':

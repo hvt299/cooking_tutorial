@@ -7,6 +7,7 @@
         require("../model/rating_db.php");
         require("../model/progress_db.php");
         require("../model/bill_db.php");
+        require("../model/bill_detail_db.php");
 
         switch ($_POST['action']){
             case 'taikhoan':
@@ -43,6 +44,15 @@
                     echo "<script>alert('Xóa thành công!'); location.href='table.php?action=hoadon';</script>";
                 } else {
                     echo "<script>alert('Xóa thất bại!'); location.href='table.php?action=hoadon';</script>";
+                }
+                break;
+            case 'chitiethoadon':
+                $bill_detail_id = filter_input(INPUT_POST, "delete_id");
+                if (!empty($bill_detail_id)){
+                    delete_bill_detail($bill_detail_id);
+                    echo "<script>alert('Xóa thành công!'); location.href='table.php?action=chitiethoadon';</script>";
+                } else {
+                    echo "<script>alert('Xóa thất bại!'); location.href='table.php?action=chitiethoadon';</script>";
                 }
                 break;
             case 'danhgia':

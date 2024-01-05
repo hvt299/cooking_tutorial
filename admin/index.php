@@ -87,6 +87,7 @@
                             <a class="collapse-item" href="table.php?action=khach">Khách Hàng</a>
                             <a class="collapse-item" href="table.php?action=khoahoc">Khóa Học</a>
                             <a class="collapse-item" href="table.php?action=hoadon">Hóa Đơn</a>
+                            <a class="collapse-item" href="table.php?action=chitiethoadon">Chi Tiết Hóa Đơn</a>
                             <a class="collapse-item" href="table.php?action=danhgia">Đánh Giá</a>
                             <a class="collapse-item" href="table.php?action=tiendo">Tiến Độ</a>
                         </form>
